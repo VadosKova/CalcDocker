@@ -119,6 +119,17 @@ function App() {
           <button onClick={() => calculate("-")}>-</button>
           <button onClick={() => calculate("*")}>*</button>
           <button onClick={() => calculate("/")}>/</button>
+          <button onClick={() => calculate("%")}>%</button>
+
+          <button
+            onClick={() => {
+              setA("");
+              setB("");
+              setResult("");
+            }}
+          >
+            C
+          </button>
 
           <h3>Result: {result}</h3>
 

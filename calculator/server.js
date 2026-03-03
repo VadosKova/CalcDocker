@@ -38,6 +38,7 @@ app.post("/calculate", authenticateToken, (req, res) => {
     case "-": result = a - b; break;
     case "*": result = a * b; break;
     case "/": result = a / b; break;
+    case "%": result = a % b; break;
     default:
       return res.status(400).json({ message: "Invalid operator" });
   }
