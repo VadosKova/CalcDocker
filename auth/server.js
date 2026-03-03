@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-mongoose.connect("mongodb+srv://admin:admin@db.bdboune.mongodb.net/?appName=DB");
+mongoose.connect(process.env.MONGO_URI);
 
 const UserCalc = mongoose.model("UserCalc", {
   name: String,
@@ -30,7 +30,7 @@ app.post("/login", async (req, res) => {
   const valid = await bcrypt.compare(req.body.password, user.password);
   if (!valid) return res.status(400).send("Invalid password");
 
-  const token = jwt.sign({ id: user._id }, "SECRET");
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   res.json({ token });
 });
 
