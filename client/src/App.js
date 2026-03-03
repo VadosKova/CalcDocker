@@ -77,7 +77,61 @@ function App() {
     <div style={{ padding: 20 }}>
       <h1>Microservice Calculator</h1>
 
-      
+      {!isLoggedIn ? (
+        <>
+          <h2>Register / Login</h2>
+
+          <input
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <br />
+
+          <input
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <br />
+
+          <input
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <br />
+
+          <button onClick={register}>Register</button>
+          <button onClick={login}>Login</button>
+        </>
+      ) : (
+        <>
+          <h2>Calculator</h2>
+
+          <input placeholder=" " onChange={(e) => setA(e.target.value)} />
+          <input placeholder=" " onChange={(e) => setB(e.target.value)} />
+
+          <br />
+
+          <button onClick={() => calculate("+")}>+</button>
+          <button onClick={() => calculate("-")}>-</button>
+          <button onClick={() => calculate("*")}>*</button>
+          <button onClick={() => calculate("/")}>/</button>
+
+          <h3>Result: {result}</h3>
+
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setIsLoggedIn(false);
+            }}
+          >
+            Logout
+          </button>
+        </>
+      )}
     </div>
   );
 }
