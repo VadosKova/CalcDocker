@@ -11,8 +11,8 @@ app.use(cors());
 mongoose.connect(process.env.MONGO_URI);
 
 const UserCalc = mongoose.model("UserCalc", {
-  name: String,
-  email: String,
+  name: { type: String, unique: true },
+  email: { type: String, unique: true },
   password: String,
 });
 
@@ -24,7 +24,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/login", async (req, res) => {
-  const user = await UserCalc.findOne({ name: req.body.name });
+  const user = await UserCalc.findOne({ email: req.body.email });
   if (!user) return res.status(400).send("User not found");
 
   const valid = await bcrypt.compare(req.body.password, user.password);

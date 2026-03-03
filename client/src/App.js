@@ -108,7 +108,7 @@ function App() {
 
               <button onClick={register}>Register</button>
 
-              <p style={{ cursor: "pointer", color: "blue" }}
+              <p style={{ cursor: "pointer", color: "red" }}
                  onClick={() => setIsLoginMode(true)}>
                 Already have account? Login
               </p>
@@ -118,9 +118,9 @@ function App() {
               <h2>Login</h2>
 
               <input
-                placeholder="Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <br />
 
@@ -134,7 +134,7 @@ function App() {
 
               <button onClick={login}>Login</button>
 
-              <p style={{ cursor: "pointer", color: "blue" }}
+              <p style={{ cursor: "pointer", color: "red" }}
                  onClick={() => setIsLoginMode(false)}>
                 Register new account
               </p>
