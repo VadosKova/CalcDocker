@@ -18,7 +18,40 @@ function App() {
     if (token) setIsLoggedIn(true);
   }, []);
 
-  
+  const register = async () => {
+    try {
+      await axios.post("http://localhost:4000/register", {
+        name,
+        email,
+        password,
+      });
+
+      alert("Registered successfully");
+
+      setName("");
+      setEmail("");
+      setPassword("");
+    } catch (err) {
+      alert("Registration failed");
+    }
+  };
+
+  const login = async () => {
+    try {
+      const res = await axios.post("http://localhost:4000/login", {
+        email,
+        password,
+      });
+
+      localStorage.setItem("token", res.data.token);
+
+      setIsLoggedIn(true);
+
+      alert("Login successful");
+    } catch (err) {
+      alert("Login failed");
+    }
+  };
 
   return (
     <div style={{ padding: 20 }}>
