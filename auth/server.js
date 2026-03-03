@@ -22,3 +22,16 @@ app.post("/register", async (req, res) => {
   await user.save();
   res.json({ message: "User created" });
 });
+
+app.post("/login", async (req, res) => {
+  const user = await UserCalc.findOne({ name: req.body.name });
+  if (!user) return res.status(400).send("User not found");
+
+  const valid = await bcrypt.compare(req.body.password, user.password);
+  if (!valid) return res.status(400).send("Invalid password");
+
+  const token = jwt.sign({ id: user._id }, "SECRET");
+  res.json({ token });
+});
+
+app.listen(4000, () => console.log("Auth service running"));
