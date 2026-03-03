@@ -15,3 +15,10 @@ const UserCalc = mongoose.model("UserCalc", {
   email: String,
   password: String,
 });
+
+app.post("/register", async (req, res) => {
+  const hashed = await bcrypt.hash(req.body.password, 10);
+  const user = new UserCalc({ name: req.body.name, email: req.body.email, password: hashed });
+  await user.save();
+  res.json({ message: "User created" });
+});
