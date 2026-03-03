@@ -53,6 +53,26 @@ function App() {
     }
   };
 
+  const calculate = async (operator) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const res = await axios.post(
+        "http://localhost:5000/calculate",
+        { a: Number(a), b: Number(b), operator },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setResult(res.data.result);
+    } catch (err) {
+      alert("Error");
+    }
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Microservice Calculator</h1>
