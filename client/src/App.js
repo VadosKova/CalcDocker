@@ -12,6 +12,7 @@ function App() {
   const [result, setResult] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoginMode, setIsLoginMode] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -79,32 +80,66 @@ function App() {
 
       {!isLoggedIn ? (
         <>
-          <h2>Register / Login</h2>
+          {!isLoginMode ? (
+            <div>
+              <h2>Register</h2>
 
-          <input
-            placeholder="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <br />
+              <input
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <br />
 
-          <input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <br />
+              <input
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <br />
 
-          <input
-            placeholder="Password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <br />
+              <input
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
 
-          <button onClick={register}>Register</button>
-          <button onClick={login}>Login</button>
+              <button onClick={register}>Register</button>
+
+              <p style={{ cursor: "pointer", color: "blue" }}
+                 onClick={() => setIsLoginMode(true)}>
+                Already have account? Login
+              </p>
+            </div>
+          ) : (
+            <div>
+              <h2>Login</h2>
+
+              <input
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <br />
+
+              <input
+                placeholder="Password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <br />
+
+              <button onClick={login}>Login</button>
+
+              <p style={{ cursor: "pointer", color: "blue" }}
+                 onClick={() => setIsLoginMode(false)}>
+                Register new account
+              </p>
+            </div>
+          )}
         </>
       ) : (
         <>
