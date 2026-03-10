@@ -28,7 +28,9 @@ app.post("/save", async (req, res) => {
 });
 
 app.get("/history/:userId", async (req, res) => {
-  const data = await History.find({ userId: req.params.userId });
+  const data = await History
+    .find({ userId: req.params.userId })
+    .sort({ date: -1 });
   res.json(data);
 });
 
