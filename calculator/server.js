@@ -46,13 +46,25 @@ app.post("/calculate", authenticateToken, async (req, res) => {
 
   res.json({ result });
 
-  await axios.post("http://localhost:6000/save", {
+  await axios.post("http://history:6000/save", {
     userId: req.user.id,
     a,
     b,
     operator,
     result
   });
+});
+
+app.get("/history/:userId", async (req, res) => {
+  try {
+    const response = await axios.get(
+      `http://history:6000/history/${req.params.userId}`
+    );
+
+    res.json(response.data);
+  } catch (err) {
+    res.status(500).json({ message: "History service error" });
+  }
 });
 
 app.listen(5000, () => console.log("Calc service running"));
