@@ -46,7 +46,7 @@ app.post("/calculate", authenticateToken, async (req, res) => {
 
   res.json({ result });
 
-  await axios.post("http://history:6000/save", {
+  await axios.post("http://localhost:6000/save", {
     userId: req.user.id,
     a,
     b,
