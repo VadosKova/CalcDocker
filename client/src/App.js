@@ -14,6 +14,8 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(false);
 
+  const [history, setHistory] = useState([]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) setIsLoggedIn(true);
@@ -72,6 +74,17 @@ function App() {
     } catch (err) {
       alert("Error");
     }
+  };
+
+  const loadHistory = async () => {
+    const token = localStorage.getItem("token");
+    const payload = JSON.parse(atob(token.split(".")[1]));
+
+    const res = await axios.get(
+      `http://localhost:6000/history/${payload.id}`
+    );
+
+    setHistory(res.data);
   };
 
   return (
@@ -167,11 +180,23 @@ function App() {
           </button>
 
           <h3>Result: {result}</h3>
+          <br />
+          <button onClick={loadHistory}>Load History</button>
+          
+          <ul>
+            {history.map((item, i) => (
+              <li key={i}>
+                {item.a} {item.operator} {item.b} = {item.result}
+              </li>
+            ))}
+          </ul>
+          <br />
 
           <button
             onClick={() => {
               localStorage.removeItem("token");
               setIsLoggedIn(false);
+              setHistory([]);
             }}
           >
             Logout
