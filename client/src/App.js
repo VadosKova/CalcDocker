@@ -87,6 +87,12 @@ function App() {
     setHistory(res.data);
   };
 
+  const applyHistory = (item) => {
+    setA(item.a);
+    setB(item.b);
+    setResult(item.result);
+  };
+
   return (
     <div style={{ padding: 20 }}>
       <h1>Microservice Calculator</h1>
