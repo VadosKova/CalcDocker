@@ -1,6 +1,7 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
+const axios = require("axios");
 
 const app = express();
 app.use(express.json());
@@ -28,7 +29,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
-app.post("/calculate", authenticateToken, (req, res) => {
+app.post("/calculate", authenticateToken, async (req, res) => {
   const { a, b, operator } = req.body;
 
   let result;
@@ -44,6 +45,14 @@ app.post("/calculate", authenticateToken, (req, res) => {
   }
 
   res.json({ result });
+
+  await axios.post("http://history:6000/save", {
+    userId: req.user.id,
+    a,
+    b,
+    operator,
+    result
+  });
 });
 
 app.listen(5000, () => console.log("Calc service running"));
