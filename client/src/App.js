@@ -164,8 +164,8 @@ function App() {
         <>
           <h2>Calculator</h2>
 
-          <input placeholder=" " onChange={(e) => setA(e.target.value)} />
-          <input placeholder=" " onChange={(e) => setB(e.target.value)} />
+          <input placeholder=" " value={a} onChange={(e) => setA(e.target.value)} />
+          <input placeholder=" " value={b} onChange={(e) => setB(e.target.value)} />
 
           <br />
 
@@ -189,9 +189,20 @@ function App() {
           <br />
           <button onClick={loadHistory}>Load History</button>
           
-          <ul>
+          <ul style={{ padding: 0 }}>
             {history.map((item, i) => (
-              <li key={i}>
+              <li 
+                key={i}
+                onClick={() => applyHistory(item)}
+                style={{
+                  listStyle: "none",
+                  border: "1px solid gray",
+                  padding: "6px",
+                  margin: "4px 0",
+                  cursor: "pointer",
+                  borderRadius: "4px",
+                }}
+              >
                 {item.a} {item.operator} {item.b} = {item.result}
               </li>
             ))}
