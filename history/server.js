@@ -16,3 +16,16 @@ const History = mongoose.model("History", {
   result: Number,
   date: { type: Date, default: Date.now }
 });
+
+app.post("/save", async (req, res) => {
+  const operation = new History(req.body);
+  await operation.save();
+  res.json({ message: "Saved" });
+});
+
+app.get("/history/:userId", async (req, res) => {
+  const data = await History.find({ userId: req.params.userId });
+  res.json(data);
+});
+
+app.listen(6000, () => console.log("History service running"));
