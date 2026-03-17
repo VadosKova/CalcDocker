@@ -61,7 +61,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://calculator:5000/calculate",
+        "http://localhost:5000/calculate",
         { a: Number(a), b: Number(b), operator },
         {
           headers: {
