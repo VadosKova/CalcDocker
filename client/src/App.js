@@ -81,7 +81,7 @@ function App() {
     const payload = JSON.parse(atob(token.split(".")[1]));
 
     const res = await axios.get(
-      `http://calculator:5000/history/${payload.id}`
+      `http://localhost:5000/history/${payload.id}`
     );
 
     setHistory(res.data);
