@@ -31,3 +31,8 @@ services:
     depends_on:
       - auth
       - calculator
+  
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
