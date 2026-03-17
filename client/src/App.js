@@ -61,7 +61,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const res = await axios.post(
-        "http://localhost:5000/calculate",
+        "http://calculator:5000/calculate",
         { a: Number(a), b: Number(b), operator },
         {
           headers: {
@@ -81,7 +81,7 @@ function App() {
     const payload = JSON.parse(atob(token.split(".")[1]));
 
     const res = await axios.get(
-      `http://localhost:5000/history/${payload.id}`
+      `http://calculator:5000/history/${payload.id}`
     );
 
     setHistory(res.data);
