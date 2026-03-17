@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const { createClient } = require("redis");
+const redisClient = require("./redisClient");
 require("dotenv").config();
 
 const app = express();
@@ -12,12 +12,6 @@ mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log(err));
-
-const redisClient = createClient({
-  url: "redis://redis:6379"
-});
-
-redisClient.connect().catch(console.error);
 
 const History = mongoose.model("History", {
   userId: String,
